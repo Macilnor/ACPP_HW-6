@@ -142,6 +142,7 @@
     <ClCompile Include="ACPP_HW-6.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="findPrime.h" />
     <ClInclude Include="pcout.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
