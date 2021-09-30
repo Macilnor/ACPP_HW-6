@@ -9,6 +9,7 @@
 using namespace std;
 
 std::mutex pcout::_mutexPrint{};
+std::mutex items_m;
 
 void printId()
 {
@@ -22,6 +23,7 @@ void owner(set<int>& items, size_t items_count)
     for (size_t i = 0; i < items_count; i++)
     {
         int item = rand() % 100;
+        lock_guard<mutex> lg(items_m);
         items.insert(item);
         pcout{} << "Owner brings item with value " << item << endl;
         this_thread::sleep_for(500ms);
@@ -34,6 +36,7 @@ void thief(set<int>& items)
     while (!items.empty())
     {
         pcout{} << "Thief stole item with value " << *(--items.end()) << endl;
+        lock_guard<mutex> lg(items_m);
         items.erase(--items.end());
         this_thread::sleep_for(700ms);
     }
